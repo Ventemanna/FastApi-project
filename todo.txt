@@ -1,0 +1,2 @@
+1. Добавить дату в модель Users
+2. Поменять password на hashed_password
