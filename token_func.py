@@ -1,3 +1,4 @@
+import hashlib
 from datetime import datetime, timedelta, timezone
 
 import jwt
@@ -30,3 +31,9 @@ def get_user_from_token(token: str, db: Session):
         raise HTTPException(status_code=400, detail="Expired token is expired")
     except (InvalidTokenError, jwt.exceptions.DecodeError):
         raise HTTPException(status_code=400, detail="Invalid token")
+
+def hash_password(password: str):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def check_password(password: str, hashed_password: str):
+    return hashlib.sha256(password.encode()).hexdigest() == hashed_password
