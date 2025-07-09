@@ -1,9 +1,16 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
 
-DATABASE_URL = "postgresql:///shift"
+env_path = '.env'
+load_dotenv(dotenv_path=env_path)
 
-engine = create_engine(DATABASE_URL, echo=True)
+base_url = os.getenv("DATABASE_URL")
+algorith = os.getenv("ALGORITH")
+secret_key = os.getenv("SECRET_KEY")
+
+engine = create_engine(base_url, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_db():
