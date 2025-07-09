@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, Form
 from sqlalchemy.exc import SQLAlchemyError
 
-from database import get_db, SessionLocal
+from database import get_db
 from token_func import *
 app = FastAPI()
 
@@ -65,7 +65,7 @@ async def update_salary(login: str = Form(...),
         raise HTTPException(status_code=400, detail=str(e))
     return user
 
-
+#Данная ручка нужна только для тестирования
 @app.get("/users/")
 async def get_users(db: Session = Depends(get_db)):
     users = select(Users)
