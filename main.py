@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Depends, Form
 from sqlalchemy.exc import SQLAlchemyError
 
-from database import get_db
+from database import *
 from token_func import *
+
 app = FastAPI()
 
 @app.post("/users/")
