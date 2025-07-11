@@ -3,23 +3,20 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from database import *
 from token_func import *
+from models import UserModel
 
 app = FastAPI()
 
 @app.post("/users/")
-async def create_user(
-    login: str = Form(...),
-    password: str = Form(...),
-    salary: float = Form(...),
-    upgrade_date: datetime = Form(...),
+async def create_user(user: UserModel,
     db: Session = Depends(get_db)
 ):
-    if len(password) < 8 or password.isdigit():
+    if len(user.password) < 8 or user.password.isdigit():
         raise HTTPException(status_code=400,
                             detail="Password must be at least 8 characters long and contain at least one number")
     try:
-        new_password = hash_password(password)
-        user = Users(login=login, password=new_password, salary=salary, upgrade_date=upgrade_date)
+        new_password = hash_password(user.password)
+        user = Users(login=user.login, password=new_password, salary=user.salary, upgrade_date=user.upgrade_date)
         db.add(user)
         db.commit()
         db.refresh(user)

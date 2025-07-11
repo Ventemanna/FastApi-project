@@ -2,6 +2,16 @@ from sqlalchemy import String, Numeric, DateTime
 from sqlalchemy.orm import DeclarativeBase,Mapped, mapped_column
 from database import engine
 from datetime import datetime
+from pydantic import BaseModel
+
+#TODO Как-то сделать так чтобы salary был только позитивным числом
+#TODO Поменять коды ошибок на имеющие смысл
+
+class UserModel(BaseModel):
+    login: str
+    password: str
+    salary: float
+    upgrade_date: datetime
 
 class Base(DeclarativeBase):
     pass
