@@ -1,13 +1,13 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import pytest
 from sqlalchemy.orm import sessionmaker
 
-from database import get_db, create_engine
-from models import Base, Users
-from main import app, create_user, create_jwt_token
+from app.database import get_db, create_engine
+from app.models import Base
+from app.main import app, create_jwt_token
 from fastapi.testclient import TestClient
-from token_func import hash_password
+from app.token_func import hash_password
 
 engine = create_engine("postgresql:///tests", echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
