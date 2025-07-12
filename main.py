@@ -43,16 +43,15 @@ async def get_salary(token: str, db: Session = Depends(get_db)):
     return {"salary": user.salary, "upgrade_date": user.upgrade_date}
 
 @app.patch("/update_salary/")
-async def update_salary(login: str = Form(...),
-    password: str = Form(...),
+async def update_salary(id: int = Form(...),
     salary: float = Form(...),
     upgrade_date: datetime = Form(...),
     db: Session = Depends(get_db)
 ):
-    stmt = select(Users).where(Users.login == login)
+    stmt = select(Users).where(Users.id == id)
     user = db.scalars(stmt).first()
-    if not user or not check_password(password, user.password):
-        raise HTTPException(status_code=404, detail="Сheck the data you entered")
+    if not user:
+        raise HTTPException(status_code=404, detail="Wrong id")
     user.salary = salary
     user.upgrade_date = upgrade_date
     try:
@@ -78,4 +77,4 @@ async def get_user(id: int, db: Session = Depends(get_db)):
     person = db.scalars(stmt).first()
     if person is None:
         raise HTTPException(status_code=404, detail="No such user")
-    return {"person": person}
+    return person

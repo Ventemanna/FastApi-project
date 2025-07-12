@@ -14,7 +14,6 @@ from models import Users
 def create_jwt_token(data: dict, time: timedelta):
     information = data.copy()
     expire = datetime.now(timezone.utc) + time
-    print(expire)
     information["exp"] = expire
     return jwt.encode(information, secret_key, algorithm=algorith)
 
@@ -28,7 +27,7 @@ def get_user_from_token(token: str, db: Session):
         user = select(Users).where(Users.id == id)
         return db.scalars(user).first()
     except ExpiredSignatureError:
-        raise HTTPException(status_code=400, detail="Expired token is expired")
+        raise HTTPException(status_code=400, detail="Token is expired")
     except (InvalidTokenError, jwt.exceptions.DecodeError):
         raise HTTPException(status_code=400, detail="Invalid token")
 
