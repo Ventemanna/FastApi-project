@@ -4,8 +4,6 @@ from database import engine
 from datetime import datetime
 from pydantic import BaseModel
 
-#TODO Как-то сделать так чтобы salary был только позитивным числом
-
 class UserModel(BaseModel):
     login: str
     password: str

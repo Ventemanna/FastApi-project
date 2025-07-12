@@ -101,6 +101,19 @@ def test_create_same_users(client):
     assert success_respones.status_code == 200
     assert invalid_response.status_code == 400
 
+def test_create_user_with_uncorrect_salary(client):
+    create_user_response = client.post(
+        "/users/",
+        json={
+            "login": "user",
+            "password": "slkdjn2hbkjshbkj4",
+            "salary": "-52.10",
+            "upgrade_date": "2025-12-12T00:00:00"
+        }
+    )
+    assert create_user_response.status_code == 400
+    assert create_user_response.json()['detail'] == "Salary must be greater than zero"
+
 def test_update_salary(client):
     create_user_response = client.post(
         "/users/",
@@ -234,7 +247,6 @@ def test_expired_token(client):
     )
     assert get_salary_from_token_response.status_code == 400
     assert get_salary_from_token_response.json()['detail'] == "Token is expired"
-
 
 def test_invalid_token(client):
     get_salary_from_token_response = client.get(

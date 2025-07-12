@@ -14,6 +14,9 @@ async def create_user(user: UserModel,
     if len(user.password) < 8 or user.password.isdigit():
         raise HTTPException(status_code=400,
                             detail="Password must be at least 8 characters long and contain at least one number")
+    if user.salary <= 0:
+        raise HTTPException(status_code=400,
+                            detail="Salary must be greater than zero")
     try:
         new_password = hash_password(user.password)
         user = Users(login=user.login, password=new_password, salary=user.salary, upgrade_date=user.upgrade_date)
