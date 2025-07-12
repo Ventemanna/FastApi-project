@@ -1,6 +1,6 @@
 from sqlalchemy import String, Numeric, DateTime
 from sqlalchemy.orm import DeclarativeBase,Mapped, mapped_column
-from database import engine
+from app.database import engine
 from datetime import datetime
 from pydantic import BaseModel
 

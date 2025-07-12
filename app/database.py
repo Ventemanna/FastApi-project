@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import os
 
-env_path = '../.env'
+env_path = '.env'
 load_dotenv(dotenv_path=env_path)
 
 print(os.getenv("DATABASE_URL"))

@@ -8,8 +8,8 @@ from passlib.exc import InvalidTokenError
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from database import algorith, secret_key
-from models import Users
+from app.database import algorith, secret_key
+from app.models import Users
 
 def create_jwt_token(data: dict, time: timedelta):
     information = data.copy()

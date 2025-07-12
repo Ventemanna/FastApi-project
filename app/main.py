@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, Form
 from sqlalchemy.exc import SQLAlchemyError
 
-from database import *
-from token_func import *
-from models import UserModel
+from app.database import *
+from app.token_func import *
+from app.models import UserModel
 
 app = FastAPI()
 
