@@ -4,7 +4,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - .env
+      DATABASE_URL: "postgresql://postgres:password@db:5432/shift"
     depends_on:
       - db
 
@@ -14,7 +14,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: shift
-      DATABASE_URL: "postgresql://postgres:password@db:5432/test"
+      DATABASE_URL: "postgresql://postgres:password@db:5432/shift"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:

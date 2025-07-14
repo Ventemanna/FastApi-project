@@ -3,13 +3,16 @@ from datetime import timedelta
 import pytest
 from sqlalchemy.orm import sessionmaker
 
+import os
+
 from app.database import get_db, create_engine
 from app.models import Base
 from app.main import app, create_jwt_token
 from fastapi.testclient import TestClient
 from app.token_func import hash_password
 
-engine = create_engine("postgresql:///tests", echo=True)
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:password@db:5432/tests")
+engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 @pytest.fixture(scope="session", autouse=True)

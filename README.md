@@ -18,25 +18,27 @@
 
 ## Запуск проекта
 
+Склонируйте репизиторий на ваш компьютер `git@gitlab.com:ventemanna_test_task/fastapi-project.git` и перейдите в рабочую папку `cd fastapi-project`
+
 ### Без использования Docker
 
 Удостоверьтесь, что у вас скачан менеджер зависимостей poetry
 
-Склонируйте репизиторий на ваш компьютер `git@gitlab.com:ventemanna_test_task/fastapi-project.git` и перейдите в рабочую папку `cd fastapi-project`
-
 Чтобы скачать все библиотеки, напишите команду `poetry install`.
 
 Запустите виртуальное пространство `poetry env use python3 && poetry env activate`
+
+Запустите bash скрипт по создаю баз данных postgres `chmod +x init_db.sh && ./init_db.sh`
 
 Чтобы запустить сервер на локальном компьютере, введите команду `uvicorn app.main:app --host 127.0.0.0 --port 8000`.
 Порт можно выбрать произвольный, главное чтобы был свободен.
 
 ### С использованием Docker 
 
+Чтобы запустить проект через Docker, воспользуйтесь командой `docker compose build && docker compose up app`.
+
 ## Запуск тестов
 
 Командой `pytest` запускаются написанные тесты. 
 
 Для большей наглядности можно сгенерировать отчет по тестам командой `pytest --cov=. --cov-report=html && open htmlcov/index.html`
-
-
