@@ -10,6 +10,4 @@ RUN poetry install --no-root
 
 COPY . .
 
-CMD ["chmod", "+x", "init_db.sh"]
-CMD ["./init_db.sh"]
 CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

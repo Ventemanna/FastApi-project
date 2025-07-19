@@ -23,11 +23,11 @@
 
 Удостоверьтесь, что у вас скачан менеджер зависимостей poetry, либо скачайте командой `pip install poetry`
 
+Запустите виртуальное окружение `source $(poetry env info --path)/bin/activate`
+
 Чтобы скачать все библиотеки, напишите команду `poetry install`.
 
-Запустите виртуальное пространство `poetry env use python3 && poetry env activate`
-
-Запустите bash скрипт по создаю баз данных postgres `chmod +x init_db.sh && ./init_db.sh`
+Запустите bash скрипт по создаю баз данных postgres `chmod +x db-init/init_db.sh && db-init/init_db.sh`
 
 Чтобы запустить сервер на локальном компьютере, введите команду `uvicorn app.main:app --host 127.0.0.0 --port 8000`.
 Порт можно выбрать произвольный, главное чтобы был свободен.
@@ -44,7 +44,6 @@
 
 Для большей наглядности можно сгенерировать отчет по тестам командой `poetry run pytest --cov=. --cov-report=html && open htmlcov/index.html`
 
-
 ### С Docker
 
-Сбилдите проект `docker compose build` и запустите сервис tests `docker compose run --rm tests && open htmlcov/index.html`
+Загрузите проект `docker compose build` и запустите сервис tests `docker compose run --rm tests && open htmlcov/index.html`

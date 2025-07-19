@@ -1,6 +1,8 @@
 from datetime import timedelta
+from time import sleep
 
 import pytest
+from dotenv import load_dotenv
 from sqlalchemy.orm import sessionmaker
 
 import os
@@ -11,8 +13,10 @@ from app.main import app, create_jwt_token
 from fastapi.testclient import TestClient
 from app.token_func import hash_password
 
-DATABASE_TEST_URL = os.getenv("DATABASE_TEST_URL")
-engine = create_engine(DATABASE_TEST_URL, echo=True)
+load_dotenv(override=False)
+
+database_test_url = os.getenv("DATABASE_TEST_URL")
+engine = create_engine(database_test_url, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 @pytest.fixture(scope="session", autouse=True)

@@ -10,6 +10,19 @@ services:
     depends_on:
       - db
 
+  tests:
+    command: poetry run pytest
+    build: .
+    environment:
+      TZ: Europe/Moscow
+      DATABASE_URL: "postgresql://postgres:password@db:5432/tests"
+      DATABASE_TEST_URL: "postgresql://postgres:password@db:5432/tests"
+      PYTHONPATH: .
+    depends_on:
+      - db
+    volumes:
+      - ./htmlcov:/app/htmlcov
+
   db:
     image: postgres:13
     environment:
@@ -19,21 +32,9 @@ services:
       POSTGRES_DB: shift
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./db-initdb-init:/db-initdb-init:ro
     ports:
       - "5433:5432"
-
-  tests:
-    build: .
-    command: "poetry run pytest --cov=. --cov-report=html"
-    environment:
-      TZ: Europe/Moscow
-      DATABASE_URL: "postgresql+psycopg2://postgres:password@db:5432/tests"
-      PYTHONPATH: .
-    depends_on:
-      - db
-    volumes:
-      - ./htmlcov:/app/htmlcov
 
 volumes:
   postgres_data:
