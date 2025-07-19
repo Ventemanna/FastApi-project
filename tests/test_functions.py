@@ -11,8 +11,8 @@ from app.main import app, create_jwt_token
 from fastapi.testclient import TestClient
 from app.token_func import hash_password
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql:///tests")
-engine = create_engine(DATABASE_URL, echo=True)
+DATABASE_TEST_URL = os.getenv("DATABASE_TEST_URL")
+engine = create_engine(DATABASE_TEST_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 @pytest.fixture(scope="session", autouse=True)

@@ -38,8 +38,13 @@
 
 ## Запуск тестов
 
+### Без Docker
+
 Убедитесь, что у вас созданы базы данных `chmod +x init_db.sh && ./init_db.sh`
 
-Командой `pytest` запускаются написанные тесты. 
+Для большей наглядности можно сгенерировать отчет по тестам командой `poetry run pytest --cov=. --cov-report=html && open htmlcov/index.html`
 
-Для большей наглядности можно сгенерировать отчет по тестам командой `pytest --cov=. --cov-report=html && open htmlcov/index.html`
+
+### С Docker
+
+Сбилдите проект `docker compose build` и запустите сервис tests `docker compose run --rm tests && open htmlcov/index.html`

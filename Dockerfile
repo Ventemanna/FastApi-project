@@ -1,5 +1,7 @@
 FROM python:3.13
 
+WORKDIR /app
+
 COPY pyproject.toml poetry.lock ./
 RUN pip install poetry
 RUN poetry env use python3
